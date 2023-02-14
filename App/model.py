@@ -49,12 +49,10 @@ def new_data_structs():
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
     """
-    data_structs = {
-        "data": None,
-    }
+    data_structs = {}
 
-    data_structs["data"] = lt.newList(datastructure="ARRAY_LIST",
-                                     cmpfunction=compare)
+    data_structs["data"] = lt.newList(datastructure="ARRAY_LIST", cmpfunction=compare)
+    
 
     return data_structs
 
@@ -65,21 +63,20 @@ def add_data(data_structs, data):
     """
     Función para agregar nuevos elementos a la lista
     """
-    d = new_data(data["id"], data["info"])
-    lt.addLast(data_structs["data"], d)
-
-    return data_structs
+    #d = new_data(data["año"], data["codigo"])
+    #lt.addLast(data_structs["data"], data)
+    lt.addLast(data_structs['data'], data)
 
 
 # Funciones para creacion de datos
 
-def new_data(id, info):
+def new_data(año, codigo):
     """
     Crea una nueva estructura para modelar los datos
     """
-    data = {'id': 0, "info": ""}
-    data["id"] = id
-    data["info"] = info
+    data = {'año': 0, "codigo": ""}
+    data["año"] = año
+    data["codigo"] = codigo
 
     return data
 

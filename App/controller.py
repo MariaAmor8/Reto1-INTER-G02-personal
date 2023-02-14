@@ -35,10 +35,7 @@ def new_controller():
     """
     Crea una instancia del modelo
     """
-    control = {
-        "model": None
-    }
-    control["model"] = model.new_data_structs()
+    control = model.new_data_structs()
     return control
 
 
@@ -49,7 +46,12 @@ def load_data(control, filename):
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
-    pass
+    file = cf.data_dir + "DIAN/Salida_agregados_renta_juridicos_AG-small.csv"
+    input_file = csv.DictReader(open(file, encoding="utf-8"))
+    
+    for actividad in input_file:
+        model.add_data(control, actividad)
+        
 
 
 # Funciones de ordenamiento
