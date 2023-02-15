@@ -157,9 +157,11 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 load_data(control)
-                #print(control)
-                print("Se cargaron " + str(controller.load_data(control,0)) + " filas")
-                
+                filas = controller.load_data(control,0)
+                print("Se cargaron " + str(filas) + " filas")
+                for fila in range(filas):
+                    if fila <= 2 or fila >= filas - 3:
+                        print(control['data']['elements'][fila])
                 
             elif int(inputs) == 2:
                 print_req_1(control)

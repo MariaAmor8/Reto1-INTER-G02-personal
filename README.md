@@ -32,7 +32,7 @@ This repository is part of the data structure and algorithms (#EDA) teaching fra
 
 The students edit this section to add their names, Uniandes emails, and specify which project functionality of the project they will implement.
 
-1. *Requerimiento*, Jacobo Zarruk, j.zarruk@uniandes.edu.co, 202220. 
+1. *Requerimiento*, Jacobo Zarruk, j.zarruk@uniandes.edu.co, 202223913. 
 1. *Requerimiento*, María José Amorocho, m.amorocho@uniandes.edu.co, 202220179.
 
 
