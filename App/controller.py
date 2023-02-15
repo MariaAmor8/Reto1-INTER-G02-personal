@@ -48,12 +48,15 @@ def load_data(control, filename):
     # TODO: Realizar la carga de datos
     file = cf.data_dir + "DIAN/Salida_agregados_renta_juridicos_AG-small.csv"
     input_file = csv.DictReader(open(file, encoding="utf-8"))
+    filas = 0
     
-    for actividad in input_file:
-        model.add_data(control, actividad)
+    for impuesto in input_file:
+        model.add_data(control, impuesto)
+    
+        filas += 1
         
-
-
+    return filas
+        
 # Funciones de ordenamiento
 
 def sort(control):

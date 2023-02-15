@@ -65,7 +65,7 @@ def load_data(control):
     Carga los datos
     """
     controller.load_data(control, 'test')
-    print(control)
+    
 
 
 def print_data(control, id):
@@ -157,6 +157,8 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 load_data(control)
+                #print(control)
+                print("Se cargaron " + str(controller.load_data(control,0)) + " filas")
                 
                 
             elif int(inputs) == 2:

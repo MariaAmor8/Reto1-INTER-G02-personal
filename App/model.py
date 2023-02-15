@@ -63,20 +63,37 @@ def add_data(data_structs, data):
     """
     Función para agregar nuevos elementos a la lista
     """
-    #d = new_data(data["año"], data["codigo"])
-    #lt.addLast(data_structs["data"], data)
-    lt.addLast(data_structs['data'], data)
+    d = new_data(data["Año"], data["Código actividad económica"], data["Nombre actividad económica"],
+                 data["Código sector económico"], data["Nombre sector económico"], data["Código subsector económico"],
+                 data["Nombre subsector económico"], data["Total ingresos netos"], data["Total costos y gastos"],
+                 data["Total saldo a pagar"], data["Total saldo a favor"])
+    
+    
+    
+    lt.addLast(data_structs['data'], d)
+    
+    return data_structs
 
 
 # Funciones para creacion de datos
 
-def new_data(año, codigo):
+def new_data(año, codigo, nom_act_ec, codigo_sec_ec,nombre_sec_ec, codigo_subsector,nombre_sebsector,
+             total_ingr_netos, total_costos_gastos,saldo_a_pagar, saldo_favor):
     """
     Crea una nueva estructura para modelar los datos
     """
-    data = {'año': 0, "codigo": ""}
-    data["año"] = año
-    data["codigo"] = codigo
+    data = {}
+    data["Año"] = año
+    data["Código actividad económica"] = codigo
+    data["Nombre actividad económica"] = nom_act_ec
+    data["Código sector económico"] = codigo_sec_ec
+    data["Nombre sector económico"] = nombre_sec_ec
+    data["Código subsector económico"]= codigo_subsector
+    data["Nombre subsector económico"] = nombre_sebsector
+    data["Total ingresos netos"] = total_ingr_netos
+    data["Total costos y gastos"] = total_costos_gastos
+    data["Total saldo a pagar"] = saldo_a_pagar
+    data["Total saldo a favor"] = saldo_favor
 
     return data
 
