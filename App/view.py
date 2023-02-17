@@ -27,6 +27,8 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
+import traceback
+
 #from tabulate import tabulate
 
 """
@@ -197,6 +199,9 @@ if __name__ == "__main__":
                 
             else:
                 print("Opción errónea, vuelva a elegir.\n")
+                
         except ValueError:
             print("Ingrese una opción válida.\n")
+            traceback.print_exc()
+            
     sys.exit(0)
