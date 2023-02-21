@@ -58,7 +58,6 @@ def print_menu():
     print("8- Ejecutar Requerimiento 7")
     print("9- Tipo de estructura de dato")
     print("10- Obtener dato dado un ID")
-    print("11- Seleccionar el tipo de representación")
     print("0- Salir")
 
 
@@ -86,16 +85,15 @@ def print_data(control, id):
     """
         Función que imprime un dato dado su ID
     """
-    data = controller.get_data(control, id)
-    print("El dato con el ID", id, "es:", data)
-
+    #TODO: Realizar la función para imprimir un elemento
+    pass
 
 def print_req_1(control):
     """
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    print(controller.req_1(control))
+    pass
 
 
 def print_req_2(control):
@@ -103,7 +101,7 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    print(controller.req_2(control))
+    pass
 
 
 def print_req_3(control):
@@ -111,7 +109,7 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    print(controller.req_3(control))
+    pass
 
 
 def print_req_4(control):
@@ -119,7 +117,7 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    print(controller.req_4(control))
+    pass
 
 
 def print_req_5(control):
@@ -127,7 +125,7 @@ def print_req_5(control):
         Función que imprime la solución del Requerimiento 5 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 5
-    print(controller.req_5(control))
+    pass
 
 
 def print_req_6(control):
@@ -135,7 +133,7 @@ def print_req_6(control):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    print(controller.req_6(control))
+    pass
 
 
 def print_req_7(control):
@@ -143,21 +141,14 @@ def print_req_7(control):
         Función que imprime la solución del Requerimiento 7 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 7
-    print(controller.req_7(control))
+    pass
 
 
 def print_req_8(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola
     """
-    # TODO: Imprimir el resultado del requerimiento 8 > pide al usuario seleccionar el tipo de 
-    # representación de la lista (ARRAY_LIST o LINKED_LIST)
-    
-
-    print(controller.req_8(control))
-
-
-def print_seleccion_representacio():
+    # TODO: Imprimir el resultado del requerimiento 8
     print()
     print("1. ARRAY_LIST")
     print("2. SINGLE_LINKED")
@@ -223,14 +214,11 @@ if __name__ == "__main__":
                 print_req_7(control)
 
             elif int(inputs) == 9:
-                print_req_8(control)
+                control, data_type = print_req_8()
 
             elif int(inputs) == 10:
                 id = input("Ingrese un id: ")
                 print_data(control, id)
-
-            elif int(inputs) == 11:
-                control, data_type = print_seleccion_representacio()
 
             elif int(inputs) == 0:
                 working = False
@@ -242,5 +230,4 @@ if __name__ == "__main__":
         except ValueError:
             print("Ingrese una opción válida.\n")
             traceback.print_exc()
-            
     sys.exit(0)

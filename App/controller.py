@@ -67,11 +67,8 @@ def sort(control):
     """
     Ordena los datos del modelo
     """
-    start_time = get_time()
-    model.sort(control["model"])
-    end_time = get_time()
-    delta_t = delta_time(start_time, end_time)
-    return delta_t
+    #TODO: Llamar la función del modelo para ordenar los datos
+    pass
 
 
 # Funciones de consulta sobre el catálogo
@@ -80,8 +77,8 @@ def get_data(control, id):
     """
     Retorna un dato por su ID.
     """
-    data = model.get_data(control["model"], id)
-    return data
+    #TODO: Llamar la función del modelo para obtener un dato
+    pass
 
 
 def req_1(control):
@@ -89,8 +86,7 @@ def req_1(control):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    req_1 = model.req_1(control["model"])
-    return req_1
+    pass
 
 
 def req_2(control):
@@ -98,8 +94,7 @@ def req_2(control):
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
-    req_2 = model.req_2(control["model"])
-    return req_2
+    pass
 
 
 def req_3(control):
@@ -107,8 +102,7 @@ def req_3(control):
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
-    req_3 = model.req_3(control["model"])
-    return req_3
+    pass
 
 
 def req_4(control):
@@ -116,8 +110,7 @@ def req_4(control):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    req_4 = model.req_4(control["model"])
-    return req_4
+    pass
 
 
 def req_5(control):
@@ -125,17 +118,14 @@ def req_5(control):
     Retorna el resultado del requerimiento 5
     """
     # TODO: Modificar el requerimiento 5
-    req_5 = model.req_5(control["model"])
-    return req_5
-
+    pass
 
 def req_6(control):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    req_6 = model.req_6(control["model"])
-    return req_6
+    pass
 
 
 def req_7(control):
@@ -143,8 +133,7 @@ def req_7(control):
     Retorna el resultado del requerimiento 7
     """
     # TODO: Modificar el requerimiento 7
-    req_7 = model.req_7(control["model"])
-    return req_7
+    pass
 
 
 def req_8(control):
@@ -152,8 +141,7 @@ def req_8(control):
     Retorna el resultado del requerimiento 8
     """
     # TODO: Modificar el requerimiento 8
-    req_8 = model.req_8(control["model"])
-    return req_8
+    pass
 
 
 # Funciones para medir tiempos de ejecucion
