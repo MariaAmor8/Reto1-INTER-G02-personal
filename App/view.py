@@ -27,7 +27,8 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-#from tabulate import tabulate
+from tabulate import tabulate as tab
+import traceback
 
 """
 La vista se encarga de la interacción con el usuario
@@ -37,11 +38,11 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controller(data_type):
     """
         Se crea una instancia del controlador
     """
-    control = controller.new_controller()
+    control = controller.new_controller(data_type)
     return control
 
 
@@ -57,6 +58,7 @@ def print_menu():
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
     print("10- Obtener dato dado un ID")
+    print("11- Seleccionar el tipo de representación")
     print("0- Salir")
 
 
@@ -64,7 +66,19 @@ def load_data(control):
     """
     Carga los datos
     """
-    controller.load_data(control, 'test')
+    print()
+    print("1. Small")
+    print("2. 5%")
+    print("3. 10%")
+    print("4. 20%")
+    print("5. 30%")
+    print("6. 50%")
+    print("7. 80%")
+    print("8. Large")
+    size = int(input("Elija el tamaño del archivo: \n"))
+    print("Cargando información de los archivos ....\n")
+    files=["small.csv","5pct.csv","10pct.csv","20pct.csv","30pct.csv","50pct.csv","80pct.csv", "large.csv"]
+    return controller.load_data(control, files[size-1])
     
 
 
@@ -140,8 +154,18 @@ def print_req_8(control):
     print(controller.req_8(control))
 
 
+def print_seleccion_representacio():
+    print()
+    print("1. ARRAY_LIST")
+    print("2. SINGLE_LINKED")
+    data_type = int(input("Seleccione el tipo de representación de la lista: \n"))
+    control = new_controller(data_type)
+    return control, data_type
+
+
 # Se crea el controlador asociado a la vista
-control = new_controller()
+data_type = 1
+control = new_controller(data_type)
 
 # main del reto
 if __name__ == "__main__":
@@ -155,14 +179,25 @@ if __name__ == "__main__":
         inputs = input('Seleccione una opción para continuar\n')
         try:
             if int(inputs) == 1:
-                print("Cargando información de los archivos ....\n")
-                load_data(control)
-                filas = controller.load_data(control,0)
+                filas = load_data(control)
                 print("Se cargaron " + str(filas) + " filas")
-                for fila in range(filas):
-                    if fila <= 2 or fila >= filas - 3:
-                        print(control['data']['elements'][fila])
-                
+                carga = {"Año":[], "Código actividad económica":[], "Nombre actividad económica":[], "Código sector económico":[],
+                         "Nombre sector económico":[], "Código subsector económico":[], "Nombre subsector económico":[],
+                         "Total ingresos netos":[], "Total costos y gastos":[], "Total saldo a pagar":[], "Total saldo a favor":[]}
+                if data_type == 1:
+                    for fila in [0,1,2,filas-3,filas-2,filas-1]:
+                        for llave in carga:
+                            carga[llave].append(control['data']['elements'][fila][llave])
+                    print(tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,10,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,10,15]))
+                else:
+                    fila = 0
+                    for elemento in lt.iterator(control['data']):
+                        if fila in [0,1,2,filas-3,filas-2,filas-1]:
+                            for llave in carga:
+                                carga[llave].append(elemento[llave])
+                        fila+=1
+                    print(tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,12,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,12,15]))
+
             elif int(inputs) == 2:
                 print_req_1(control)
 
@@ -191,6 +226,9 @@ if __name__ == "__main__":
                 id = input("Ingrese un id: ")
                 print_data(control, id)
 
+            elif int(inputs) == 11:
+                control, data_type = print_seleccion_representacio()
+
             elif int(inputs) == 0:
                 working = False
                 print("\nGracias por utilizar el programa")
@@ -199,4 +237,5 @@ if __name__ == "__main__":
                 print("Opción errónea, vuelva a elegir.\n")
         except ValueError:
             print("Ingrese una opción válida.\n")
+            traceback.print_exc()
     sys.exit(0)

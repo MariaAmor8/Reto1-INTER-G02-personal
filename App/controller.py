@@ -31,11 +31,15 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller():
+def new_controller(data_type):
     """
     Crea una instancia del modelo
     """
-    control = model.new_data_structs()
+    if data_type == 1:
+        data_type = "ARRAY_LIST"
+    else:
+        data_type = "SINGLE_LINKED"
+    control = model.new_data_structs(data_type)
     return control
 
 
@@ -46,7 +50,7 @@ def load_data(control, filename):
     Carga los datos del reto
     """
     # TODO: Realizar la carga de datos
-    file = cf.data_dir + "DIAN/Salida_agregados_renta_juridicos_AG-small.csv"
+    file = cf.data_dir + "DIAN/Salida_agregados_renta_juridicos_AG-"+ filename
     input_file = csv.DictReader(open(file, encoding="utf-8"))
     filas = 0
     
