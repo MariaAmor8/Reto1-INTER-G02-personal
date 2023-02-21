@@ -56,7 +56,7 @@ def print_menu():
     print("6- Ejecutar Requerimiento 5")
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
-    print("9- Ejecutar Requerimiento 8")
+    print("9- Tipo de estructura de dato")
     print("10- Obtener dato dado un ID")
     print("11- Seleccionar el tipo de representación")
     print("0- Salir")
@@ -150,7 +150,10 @@ def print_req_8(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola
     """
-    # TODO: Imprimir el resultado del requerimiento 8
+    # TODO: Imprimir el resultado del requerimiento 8 > pide al usuario seleccionar el tipo de 
+    # representación de la lista (ARRAY_LIST o LINKED_LIST)
+    
+
     print(controller.req_8(control))
 
 
@@ -235,7 +238,9 @@ if __name__ == "__main__":
                 
             else:
                 print("Opción errónea, vuelva a elegir.\n")
+                
         except ValueError:
             print("Ingrese una opción válida.\n")
             traceback.print_exc()
+            
     sys.exit(0)
