@@ -182,14 +182,38 @@ def req_8(data_structs):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
-def compare(data_1, data_2):
+def compare(data_1, data_2, id):
     """
     Función encargada de comparar dos datos
     """
     #TODO: Crear función comparadora de la lista
-    pass
+    if data_1[id] > data_2[id]:
+        return True
+    elif data_1[id] < data_2[id]:
+        return False
+    else:
+        return "equal"
 
 # Funciones de ordenamiento
+
+
+def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
+    """
+    Devuelve verdadero (True) si el año de impuesto1 es menor que el de impuesto2,
+    en caso de que sean iguales tenga en cuenta el código de la actividad económica,
+    de lo contrario devuelva falso (False).
+    Args:
+    impuesto1: información del primer registro de impuestos que incluye el “Año” y el
+    “Código
+    actividad económica”
+    impuesto2: información del segundo registro de impuestos que incluye el “Año” y el
+    “Código actividad económica”
+    """
+    year = compare(impuesto1, impuesto2, "Año")
+    if year == "equal":
+        return compare(impuesto1, impuesto2, "Código actividad económica")
+    else:
+        return year
 
 
 def sort_criteria(data_1, data_2):
@@ -203,12 +227,17 @@ def sort_criteria(data_1, data_2):
         _type_: _description_
     """
     #TODO: Crear función comparadora para ordenar
-    pass
+    return cmp_impuestos_by_anio_CAE(data_1, data_2)
 
 
-def sort(data_structs):
+def sort(data_structs, sort_type):
     """
     Función encargada de ordenar la lista con los datos
     """
     #TODO: Crear función de ordenamiento
-    pass
+    if sort_type == "Shell":
+        return sa.sort(data_structs["data"], sort_criteria)
+    elif sort_type == "Insertion":
+        return ins.sort(data_structs["data"], sort_criteria)
+    else:
+        return se.sort(data_structs["data"], sort_criteria)

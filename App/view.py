@@ -58,6 +58,7 @@ def print_menu():
     print("8- Ejecutar Requerimiento 7")
     print("9- Tipo de estructura de dato")
     print("10- Obtener dato dado un ID")
+    print("11- Ordenamiento de datos")
     print("0- Salir")
 
 
@@ -144,7 +145,7 @@ def print_req_7(control):
     pass
 
 
-def print_req_8(control):
+def print_seleccion_lista(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola
     """
@@ -156,6 +157,14 @@ def print_req_8(control):
     control = new_controller(data_type)
     return control, data_type
 
+
+def print_ordenamiento(control):
+    print()
+    print("1. Shell Sort")
+    print("2. Insertion Sort")
+    print("3. Selection Sort")
+    sort_type = int(input("Seleccione el tipo de ordenamiento: \n"))
+    return controller.sort(control, sort_type)
 
 # Se crea el controlador asociado a la vista
 data_type = 1
@@ -214,11 +223,16 @@ if __name__ == "__main__":
                 print_req_7(control)
 
             elif int(inputs) == 9:
-                control, data_type = print_req_8()
+                control, data_type = print_seleccion_lista(control)
 
             elif int(inputs) == 10:
                 id = input("Ingrese un id: ")
                 print_data(control, id)
+                
+            elif int(inputs) == 11:
+                datos, time, sort_type = print_ordenamiento(control)
+                print()
+                print("El tiempo tardado en ordenar los datos usando el algoritmo de " + str(sort_type) + " es de: \n" + str(time) + " milisegundos")
 
             elif int(inputs) == 0:
                 working = False

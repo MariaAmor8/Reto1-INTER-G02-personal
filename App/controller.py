@@ -63,12 +63,21 @@ def load_data(control, filename):
         
 # Funciones de ordenamiento
 
-def sort(control):
+def sort(control, sort_type):
     """
     Ordena los datos del modelo
     """
     #TODO: Llamar la función del modelo para ordenar los datos
-    pass
+    if sort_type == 1:
+        sort_type = "Shell"
+    elif sort_type == 2:
+        sort_type = "Insertion"
+    else:
+        sort_type = "Selection"
+    start = get_time()
+    datos = model.sort(control, sort_type)
+    end = get_time()
+    return datos, delta_time(start, end), sort_type
 
 
 # Funciones de consulta sobre el catálogo
