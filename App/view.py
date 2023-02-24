@@ -63,7 +63,7 @@ def print_menu():
 
 
 
-def load_data(control):
+def load_data(control, data_type):
     """
     Carga los datos
     """
@@ -79,7 +79,24 @@ def load_data(control):
     size = int(input("Elija el tamaño del archivo: \n"))
     print("Cargando información de los archivos ....\n")
     files=["small.csv","5pct.csv","10pct.csv","20pct.csv","30pct.csv","50pct.csv","80pct.csv", "large.csv"]
-    return controller.load_data(control, files[size-1])
+    filas = controller.load_data(control, files[size-1])
+    carga = {"Año":[], "Código actividad económica":[], "Nombre actividad económica":[], "Código sector económico":[],
+                         "Nombre sector económico":[], "Código subsector económico":[], "Nombre subsector económico":[],
+                         "Total ingresos netos":[], "Total costos y gastos":[], "Total saldo a pagar":[], "Total saldo a favor":[]}
+    if data_type == 1:
+        for fila in [0,1,2,filas-3,filas-2,filas-1]:
+            for llave in carga:
+                carga[llave].append(control['data']['elements'][fila][llave])
+        tabla = tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,10,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,10,15])
+    else:
+        fila = 0
+        for elemento in lt.iterator(control['data']):
+            if fila in [0,1,2,filas-3,filas-2,filas-1]:
+                for llave in carga:
+                    carga[llave].append(elemento[llave])
+            fila+=1
+        tabla = tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,12,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,12,15])
+    return filas, tabla
     
 
 
@@ -164,6 +181,8 @@ def print_ordenamiento(control):
     print("1. Shell Sort")
     print("2. Insertion Sort")
     print("3. Selection Sort")
+    print("4. Merge Sort")
+    print("5. Quick Sort")
     sort_type = int(input("Seleccione el tipo de ordenamiento: \n"))
     return controller.sort(control, sort_type)
 
@@ -183,24 +202,9 @@ if __name__ == "__main__":
         inputs = input('Seleccione una opción para continuar\n')
         try:
             if int(inputs) == 1:
-                filas = load_data(control)
+                filas, tabla = load_data(control, data_type)
                 print("Se cargaron " + str(filas) + " filas")
-                carga = {"Año":[], "Código actividad económica":[], "Nombre actividad económica":[], "Código sector económico":[],
-                         "Nombre sector económico":[], "Código subsector económico":[], "Nombre subsector económico":[],
-                         "Total ingresos netos":[], "Total costos y gastos":[], "Total saldo a pagar":[], "Total saldo a favor":[]}
-                if data_type == 1:
-                    for fila in [0,1,2,filas-3,filas-2,filas-1]:
-                        for llave in carga:
-                            carga[llave].append(control['data']['elements'][fila][llave])
-                    print(tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,10,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,10,15]))
-                else:
-                    fila = 0
-                    for elemento in lt.iterator(control['data']):
-                        if fila in [0,1,2,filas-3,filas-2,filas-1]:
-                            for llave in carga:
-                                carga[llave].append(elemento[llave])
-                        fila+=1
-                    print(tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,12,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,12,15]))
+                print(tabla)
 
             elif int(inputs) == 2:
                 print_req_1(control)

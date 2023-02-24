@@ -187,9 +187,9 @@ def compare(data_1, data_2, id):
     Función encargada de comparar dos datos
     """
     #TODO: Crear función comparadora de la lista
-    if data_1[id] > data_2[id]:
+    if data_1[id] < data_2[id]:
         return True
-    elif data_1[id] < data_2[id]:
+    elif data_1[id] > data_2[id]:
         return False
     else:
         return "equal"
@@ -239,5 +239,9 @@ def sort(data_structs, sort_type):
         return sa.sort(data_structs["data"], sort_criteria)
     elif sort_type == "Insertion":
         return ins.sort(data_structs["data"], sort_criteria)
-    else:
+    elif sort_type == "Selection":
         return se.sort(data_structs["data"], sort_criteria)
+    elif sort_type == "Merge":
+        return merg.sort(data_structs["data"], sort_criteria)
+    else:
+        return quk.sort(data_structs["data"], sort_criteria)

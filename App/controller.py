@@ -72,8 +72,12 @@ def sort(control, sort_type):
         sort_type = "Shell"
     elif sort_type == 2:
         sort_type = "Insertion"
-    else:
+    elif sort_type == 3:
         sort_type = "Selection"
+    elif sort_type == 4:
+        sort_type = "Merge"
+    else:
+        sort_type = "Quick"
     start = get_time()
     datos = model.sort(control, sort_type)
     end = get_time()
