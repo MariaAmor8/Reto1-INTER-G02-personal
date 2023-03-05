@@ -175,6 +175,7 @@ if __name__ == "__main__":
         inputs = input('Seleccione una opción para continuar\n')
         try:
             if int(inputs) == 1:
+                control  = new_controller()
                 control = load_data(control)
                 filas = controller.data_size(control)
                 print("Se cargaron " + str(filas) + " filas")

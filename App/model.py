@@ -123,7 +123,8 @@ def req_1(data_structs):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    return 0
+    lista_impuestos = data_structs["data"]["elements"]
+    return sa.sort(data_structs["data"], sort_criteria2)
 
 
 def req_2(data_structs):
@@ -198,7 +199,6 @@ def compare(data_1, data_2, id):
 
 # Funciones de ordenamiento
 
-
 def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     """
     Devuelve verdadero (True) si el año de impuesto1 es menor que el de impuesto2,
@@ -217,6 +217,12 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
     else:
         return year
     
+def cmp_impuestos_saldo_a_pagar(impuesto1, impuesto2):
+    año = compare(impuesto1, impuesto2, "Año")
+    if año == "equal":
+        return compare(impuesto1, impuesto2, "Total saldo a pagar")
+    else:
+        return año
 
     return cmp_impuestos_by_saldo_pagar(data_1,data_2)
 
@@ -233,7 +239,7 @@ def sort_criteria(data_1, data_2):
     #TODO: Crear función comparadora para ordenar
     return cmp_impuestos_by_anio_CAE(data_1, data_2)
 
-def sort(data_structs, sort_type):
+def sort(data_structs, sort_type): 
     """
     Función encargada de ordenar la lista con los datos
     """
@@ -248,3 +254,6 @@ def sort(data_structs, sort_type):
         return merg.sort(data_structs["data"], sort_criteria)
     else:
         return quk.sort(data_structs["data"], sort_criteria)
+  
+def sort_criteria2(data_1, data_2):
+    return cmp_impuestos_saldo_a_pagar(data_1, data_2)
