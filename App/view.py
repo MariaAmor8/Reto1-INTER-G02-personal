@@ -38,11 +38,11 @@ operación solicitada
 """
 
 
-def new_controller(data_type):
+def new_controller():
     """
         Se crea una instancia del controlador
     """
-    control = controller.new_controller(data_type)
+    control = controller.new_controller()
     return control
 
 
@@ -62,8 +62,7 @@ def print_menu():
     print("0- Salir")
 
 
-
-def load_data(control, data_type):
+def load_data(control):
     """
     Carga los datos
     """
@@ -79,28 +78,25 @@ def load_data(control, data_type):
     size = int(input("Elija el tamaño del archivo: \n"))
     print("Cargando información de los archivos ....\n")
     files=["small.csv","5pct.csv","10pct.csv","20pct.csv","30pct.csv","50pct.csv","80pct.csv", "large.csv"]
-    filas = controller.load_data(control, files[size-1])
+    data = controller.load_data(control,files[size-1])
+    controller.sort(control, 4)
+    
+    return data
+    
+def hacer_tabla1(control,filas):
     carga = {"Año":[], "Código actividad económica":[], "Nombre actividad económica":[], "Código sector económico":[],
                          "Nombre sector económico":[], "Código subsector económico":[], "Nombre subsector económico":[],
                          "Total ingresos netos":[], "Total costos y gastos":[], "Total saldo a pagar":[], "Total saldo a favor":[]}
-    if data_type == 1:
-        for fila in [0,1,2,filas-3,filas-2,filas-1]:
-            for llave in carga:
-                carga[llave].append(control['data']['elements'][fila][llave])
-        tabla = tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,10,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,10,15])
-    else:
-        fila = 0
-        for elemento in lt.iterator(control['data']):
-            if fila in [0,1,2,filas-3,filas-2,filas-1]:
-                for llave in carga:
-                    carga[llave].append(elemento[llave])
-            fila+=1
-        tabla = tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,12,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,12,15])
-    return filas, tabla
-    
 
+    for fila in [0,1,2,filas-3,filas-2,filas-1]:
+        for llave in carga:
+            carga[llave].append(control['data']['elements'][fila][llave])
+    tabla = tab(carga, tablefmt='grid', headers='keys', colalign=['right','right','left','right','left','right','left','left','left','left','left'], maxcolwidths=[7,10,20,10,20,15,20,10,10,10,15], maxheadercolwidths=[7,10,20,10,20,15,20,10,10,10,15])
+    
+    print(tabla)
 
 def print_data(control, id):
+
     """
         Función que imprime un dato dado su ID
     """
@@ -112,7 +108,8 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    pass
+    datos_org = controller.req_1(control)
+    return  datos_org
 
 
 def print_req_2(control):
@@ -163,33 +160,9 @@ def print_req_7(control):
     pass
 
 
-def print_seleccion_lista(control):
-    """
-        Función que imprime la solución del Requerimiento 8 en consola
-    """
-    # TODO: Imprimir el resultado del requerimiento 8
-    print()
-    print("1. ARRAY_LIST")
-    print("2. SINGLE_LINKED")
-    data_type = int(input("Seleccione el tipo de representación de la lista: \n"))
-    control = new_controller(data_type)
-    return control, data_type
-
-
-def print_ordenamiento(control):
-    print()
-    print("1. Shell Sort")
-    print("2. Insertion Sort")
-    print("3. Selection Sort")
-    print("4. Merge Sort")
-    print("5. Quick Sort")
-    sort_type = int(input("Seleccione el tipo de ordenamiento: \n"))
-    return controller.sort(control, sort_type)
 
 # Se crea el controlador asociado a la vista
-data_type = 1
-control = new_controller(data_type)
-
+control  = new_controller()
 # main del reto
 if __name__ == "__main__":
     """
@@ -202,12 +175,14 @@ if __name__ == "__main__":
         inputs = input('Seleccione una opción para continuar\n')
         try:
             if int(inputs) == 1:
-                filas, tabla = load_data(control, data_type)
+                control = load_data(control)
+                filas = controller.data_size(control)
                 print("Se cargaron " + str(filas) + " filas")
-                print(tabla)
-
+                hacer_tabla1(control,filas)
+                
             elif int(inputs) == 2:
-                print_req_1(control)
+                datos = print_req_1(control)
+                print(datos)
 
             elif int(inputs) == 3:
                 print_req_2(control)
@@ -228,17 +203,15 @@ if __name__ == "__main__":
                 print_req_7(control)
 
             elif int(inputs) == 9:
-                control, data_type = print_seleccion_lista(control)
+                print_req_7(control)
 
             elif int(inputs) == 10:
                 id = input("Ingrese un id: ")
                 print_data(control, id)
                 
             elif int(inputs) == 11:
-                datos, time, sort_type = print_ordenamiento(control)
-                print()
-                print("El tiempo tardado en ordenar los datos usando el algoritmo de " + str(sort_type) + " es de: \n" + str(time) + " milisegundos")
-
+                print("0")
+                
             elif int(inputs) == 0:
                 working = False
                 print("\nGracias por utilizar el programa")

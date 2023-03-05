@@ -31,15 +31,11 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller(data_type):
+def new_controller():
     """
     Crea una instancia del modelo
     """
-    if data_type == 1:
-        data_type = "ARRAY_LIST"
-    else:
-        data_type = "SINGLE_LINKED"
-    control = model.new_data_structs(data_type)
+    control = model.new_data_structs()
     return control
 
 
@@ -49,18 +45,18 @@ def load_data(control, filename):
     """
     Carga los datos del reto
     """
-    # TODO: Realizar la carga de datos
     file = cf.data_dir + "DIAN/Salida_agregados_renta_juridicos_AG-"+ filename
     input_file = csv.DictReader(open(file, encoding="utf-8"))
-    filas = 0
     
     for impuesto in input_file:
         model.add_data(control, impuesto)
-    
-        filas += 1
         
+    return control
+     
+def data_size(control):
+    filas = model.data_size(control)
     return filas
-        
+      
 # Funciones de ordenamiento
 
 def sort(control, sort_type):
@@ -78,10 +74,8 @@ def sort(control, sort_type):
         sort_type = "Merge"
     else:
         sort_type = "Quick"
-    start = get_time()
     datos = model.sort(control, sort_type)
-    end = get_time()
-    return datos, delta_time(start, end), sort_type
+    return datos
 
 
 # Funciones de consulta sobre el catálogo
@@ -99,7 +93,8 @@ def req_1(control):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    pass
+    impuestos_org_total_saldo_pagar = model.req_1(control)
+    return impuestos_org_total_saldo_pagar
 
 
 def req_2(control):

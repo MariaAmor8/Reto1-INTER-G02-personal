@@ -44,15 +44,14 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 
 
-def new_data_structs(data_type):
+def new_data_structs():
     """
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
     """
     data_structs = {}
 
-    data_structs["data"] = lt.newList(datastructure=data_type, cmpfunction=compare)
-    
+    data_structs["data"] = lt.newList(datastructure='ARRAY_LIST', cmpfunction=compare)
 
     return data_structs
 
@@ -69,8 +68,7 @@ def add_data(data_structs, data):
                  data["Total saldo a pagar"], data["Total saldo a favor"])
     
     
-    
-    lt.addLast(data_structs['data'], d)
+    lt.addLast(data_structs["data"], d)
     
     return data_structs
 
@@ -113,7 +111,11 @@ def data_size(data_structs):
     Retorna el tamaño de la lista de datos
     """
     #TODO: Crear la función para obtener el tamaño de una lista
-    pass
+    filas = 0
+    for impuesto in data_structs["data"]["elements"]:
+        filas += 1
+        
+    return filas
 
 
 def req_1(data_structs):
@@ -121,7 +123,7 @@ def req_1(data_structs):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    pass
+    return 0
 
 
 def req_2(data_structs):
@@ -214,7 +216,9 @@ def cmp_impuestos_by_anio_CAE(impuesto1, impuesto2):
         return compare(impuesto1, impuesto2, "Código actividad económica")
     else:
         return year
+    
 
+    return cmp_impuestos_by_saldo_pagar(data_1,data_2)
 
 def sort_criteria(data_1, data_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
@@ -228,7 +232,6 @@ def sort_criteria(data_1, data_2):
     """
     #TODO: Crear función comparadora para ordenar
     return cmp_impuestos_by_anio_CAE(data_1, data_2)
-
 
 def sort(data_structs, sort_type):
     """
